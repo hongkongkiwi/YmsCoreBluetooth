@@ -218,10 +218,10 @@
 
 
 - (void)cancelConnection {
+    [self.central.manager cancelPeripheralConnection:self.cbPeripheral];
     if (self.connectCallback) {
         self.connectCallback = nil;
     }
-    [self.central.manager cancelPeripheralConnection:self.cbPeripheral];
 }
 
 
@@ -235,7 +235,8 @@
         self.connectCallback = nil;
         
     } else {
-        [self defaultConnectionHandler];
+//        [self defaultConnectionHandler];
+        [self disconnect];
     }
 }
 

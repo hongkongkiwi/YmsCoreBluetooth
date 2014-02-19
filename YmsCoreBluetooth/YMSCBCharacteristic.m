@@ -63,6 +63,11 @@
 
 
 - (void)writeValue:(NSData *)data withBlock:(void (^)(NSError *))writeCallback {
+    if (!self.parent || !self.parent.cbPeripheral) {
+        writeCallback(nil);
+        return;
+    }
+    
     if (writeCallback) {
         [self.writeCallbacks push:[writeCallback copy]];
         [self.parent.cbPeripheral writeValue:data
